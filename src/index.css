@@ -38,7 +38,6 @@
   padding: 0;
 }
 body {
-  /* background-color: var(--clr-secondary); */
   background: var(--overlay-white09),
     url("./assets/images/homepage_bg.jpg") center/cover no-repeat;
   background-attachment: fixed;
@@ -84,6 +83,7 @@ button {
 .primary-btn {
   position: absolute;
   left: 50%;
+  top: 25%;
   transform: translateX(-50%);
   width: 10em;
   border: 0.1rem solid var(--clr-accent);
