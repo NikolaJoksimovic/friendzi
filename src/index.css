@@ -132,6 +132,7 @@ h2 {
   letter-spacing: 0.6rem;
 }
 #login-span {
+  display: inline-block;
   cursor: pointer;
   color: var(--clr-accent);
   text-decoration: underline;
