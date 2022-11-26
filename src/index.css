@@ -19,7 +19,7 @@
   --overlay-black03: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3));
   --overlay-black02: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
   --overlay-black01: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1));
-  --overlay-white09: linear-gradient(
+  --overlay-white075: linear-gradient(
     rgba(255, 255, 255, 0.75),
     rgba(255, 255, 255, 0.75)
   );
@@ -38,7 +38,7 @@
   padding: 0;
 }
 body {
-  background: var(--overlay-white09),
+  background: var(--overlay-white075),
     url("./assets/images/homepage_bg.jpg") center/cover no-repeat;
   /* background-attachment: fixed; */
   font-family: var(--font-primary);
@@ -101,14 +101,15 @@ button {
   box-shadow: 0 9px 0rem 0rem var(--clr-shadow);
   border: 0.1rem solid var(--clr-shadow);
 }
-/* HOME PAGE */
+/****************** HOME PAGE ************************/
 #home-page {
   flex-direction: column;
   padding: var(--padding-page);
   max-width: 450px;
   margin: auto;
 }
-#home-page h1 {
+#home-page h1,
+h2 {
   text-align: center;
   margin: var(--margin-div);
   line-height: 1.5em;
@@ -130,6 +131,11 @@ button {
   color: var(--clr-accent);
   letter-spacing: 0.6rem;
 }
+#login-span {
+  cursor: pointer;
+  color: var(--clr-accent);
+  text-decoration: underline;
+}
 @media screen and (min-width: 768px) {
   #home-page {
     max-width: 590px;
@@ -147,3 +153,10 @@ button {
   }
 }
 /* END OF HOME PAGE */
+
+/************************ AUTHENTICATION PAGE **********************/
+#auth-page {
+  background: var(--clr-font-secondary);
+  flex-direction: column;
+}
+/* DASHBOARD PAGE */
