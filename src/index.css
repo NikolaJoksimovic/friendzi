@@ -37,12 +37,10 @@
   margin: 0;
   padding: 0;
 }
-html {
+body {
   background: var(--overlay-white09),
     url("./assets/images/homepage_bg.jpg") center/cover no-repeat;
-  background-attachment: fixed;
-}
-body {
+  /* background-attachment: fixed; */
   font-family: var(--font-primary);
   color: var(--clr-font-primary);
   font-size: 0.7rem;
@@ -55,6 +53,7 @@ body {
 @media screen and (min-width: 1080px) {
   body {
     font-size: 1rem;
+    background-attachment: fixed;
   }
 }
 .center-flex {
