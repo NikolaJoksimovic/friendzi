@@ -40,7 +40,7 @@
 body {
   background: var(--overlay-white09),
     url("./assets/images/homepage_bg.jpg") center/cover no-repeat;
-  background-attachment: fixed;
+  /* background-attachment: fixed; */
   font-family: var(--font-primary);
   color: var(--clr-font-primary);
   font-size: 0.7rem;
