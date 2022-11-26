@@ -36,7 +36,7 @@ const Home = () => {
       <h1>The weekend is coming and you just wanna have fun!</h1>
       <div className='btn-container'>
         <button className='primary-btn' onClick={handleRegisterClick}>
-          make friends
+          get started
         </button>
       </div>
       <h2>
