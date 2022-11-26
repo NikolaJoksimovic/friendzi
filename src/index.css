@@ -37,10 +37,12 @@
   margin: 0;
   padding: 0;
 }
-body {
+html {
   background: var(--overlay-white09),
     url("./assets/images/homepage_bg.jpg") center/cover no-repeat;
-  /* background-attachment: fixed; */
+  background-attachment: fixed;
+}
+body {
   font-family: var(--font-primary);
   color: var(--clr-font-primary);
   font-size: 0.7rem;
