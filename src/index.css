@@ -10,6 +10,20 @@
   --clr-font-secondary: white;
   --clr-shadow: black;
 
+  --overlay-black09: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9));
+  --overlay-black08: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8));
+  --overlay-black07: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
+  --overlay-black06: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6));
+  --overlay-black05: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+  --overlay-black04: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4));
+  --overlay-black03: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3));
+  --overlay-black02: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
+  --overlay-black01: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1));
+  --overlay-white09: linear-gradient(
+    rgba(255, 255, 255, 0.75),
+    rgba(255, 255, 255, 0.75)
+  );
+
   --padding-page: 2em;
   --padding-div: 1em 0 1em 0;
   --padding-btn: 1em;
@@ -24,7 +38,10 @@
   padding: 0;
 }
 body {
-  background-color: var(--clr-secondary);
+  /* background-color: var(--clr-secondary); */
+  background: var(--overlay-white09),
+    url("./assets/images/homepage_bg.jpg") center/cover no-repeat;
+  background-attachment: fixed;
   font-family: var(--font-primary);
   color: var(--clr-font-primary);
   font-size: 0.7rem;
