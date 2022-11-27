@@ -27,10 +27,13 @@
   --padding-page: 2em;
   --padding-div: 1em 0 1em 0;
   --padding-btn: 1em;
+  --padding-input: 0.5em;
 
   --margin-div: 1em 0 1em 0;
+  --margin-input: 0.5em 0 0.5em 0;
 
   --transition02: all 0.2s linear;
+  --transition01: all 0.1s linear;
 }
 * {
   box-sizing: border-box;
@@ -126,10 +129,17 @@ h2 {
   max-width: 200px;
 }
 #friendzi-title {
+  position: relative;
   font-size: 2rem;
   font-weight: 700;
   color: var(--clr-accent);
   letter-spacing: 0.6rem;
+}
+#friendzi-title::after {
+  content: "\00ae";
+  position: absolute;
+  top: -0.2em;
+  right: -0.7em;
 }
 #login-span {
   display: inline-block;
@@ -157,7 +167,67 @@ h2 {
 
 /************************ AUTHENTICATION PAGE **********************/
 #auth-page {
-  background: var(--clr-font-secondary);
+  position: relative;
   flex-direction: column;
+  background: var(--clr-font-secondary);
+}
+#register-form {
+  flex-direction: column;
+  max-width: 450px;
+}
+.input-box {
+  position: relative;
+  margin: var(--margin-input);
+}
+#register-form input {
+  transition: var(--transition01);
+  outline: none;
+  border-radius: 1em;
+  width: 300px;
+  border: 0.15rem solid black;
+}
+#register-form input:hover,
+#register-form input:active,
+#register-form input:focus {
+  border: 0.15rem solid var(--clr-primary);
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 3em white inset !important;
+}
+.input-span,
+#register-form input {
+  font-size: 1.3em;
+  height: 3em;
+  padding: var(--padding-input);
+  margin: var(--margin-input);
+}
+.input-span {
+  pointer-events: none;
+  position: absolute;
+  left: 0;
+  top: 0;
+  border: 0.15rem solid transparent;
+  transition: transform 0.2s linear;
+}
+
+.input-box input:focus ~ .input-span,
+.input-box input:valid ~ .input-span {
+  display: inline-block;
+  padding: 0 0.5em 0 0.5em;
+  font-size: 1em;
+  color: var(--clr-font-secondary);
+  background-color: var(--clr-primary);
+  border-radius: 0.5em;
+  height: auto;
+  transform: translate(1em, -50%);
+}
+
+@media screen and (min-width: 768px) {
+  #register-form input {
+    width: 350px;
+  }
 }
 /* DASHBOARD PAGE */
