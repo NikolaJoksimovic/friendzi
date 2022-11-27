@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { selectAllVariables } from "../store/store";
 
 const Auth = () => {
+  const navigate = useNavigate();
   const vars = useSelector(selectAllVariables);
   const isSignIn = vars.isSignIn; //check if it's a sign in and not a log in...
   const [input, setInput] = useState({
@@ -17,7 +19,9 @@ const Auth = () => {
     const value = e.target.value;
     setInput({ ...input, [name]: value });
   };
-  const handleSubmit = () => {};
+  const handleSubmit = () => {
+    navigate("/dashboard");
+  };
 
   return (
     <div id='auth-page' className='height-100 center-flex'>
