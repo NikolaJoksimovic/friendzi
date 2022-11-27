@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import logoImage from "../assets/images/friendzi_homepage_logo.png";
 import { useDispatch } from "react-redux";
@@ -7,11 +7,13 @@ import { invertIsSignIn } from "../store/store";
 const Home = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
 
   // *****************************************
   // Ako imas token onda redirect na Dashboard
   let authToken = false;
   // *****************************************
+
   // handles
   const handleRegisterClick = () => {
     dispatch(invertIsSignIn(true));
@@ -26,14 +28,23 @@ const Home = () => {
     if (authToken) {
       navigate("/dashboard");
     }
+    setLoading(true);
   }, []);
-  return (
+  useEffect(() => {
+    if (loading) setLoading(false);
+  }, [loading]);
+
+  return loading ? (
+    <h1>loading...</h1>
+  ) : (
     <div id='home-page' className='height-100 center-flex'>
       <div className='logo-container center-flex'>
         <img src={logoImage} alt='logo.png' />
         <p id='friendzi-title'>FriendZi</p>
       </div>
-      <h1>The weekend is coming and you just wanna have fun!</h1>
+      <h1>
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsa, nihil.
+      </h1>
       <div className='btn-container'>
         <button className='primary-btn' onClick={handleRegisterClick}>
           get started
