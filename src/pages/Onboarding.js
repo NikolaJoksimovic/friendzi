@@ -1,9 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { AiOutlineUpload } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 import urls from "../urls/urls.json";
 
 const Onboarding = () => {
+  const navigate = useNavigate();
   const [input, setInput] = useState({
     firstName: "",
     lastName: "",
@@ -26,7 +28,8 @@ const Onboarding = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = axios.patch("/onboarding", input);
+      const response = await axios.patch("/onboarding", input);
+      if (response) navigate("/dashboard");
     } catch (error) {
       console.log(error);
     }
@@ -49,7 +52,7 @@ const Onboarding = () => {
     setCheckBoxes(document.querySelectorAll(".checkbox-input"));
   }, []);
 
-  console.log(input);
+  // console.log(input);
 
   return (
     <div id='onboarding-page' className='height-100 center-flex'>
