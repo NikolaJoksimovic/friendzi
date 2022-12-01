@@ -2,17 +2,16 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import logoImage from "../assets/images/friendzi_homepage_logo.png";
 import { useDispatch } from "react-redux";
-import { invertIsSignIn } from "../store/store";
+import { invertIsSignIn, selectAllVariables } from "../store/store";
+import urls from "../urls/urls.json";
+import { useSelector } from "react-redux";
 
 const Home = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
-
-  // *****************************************
-  // Ako imas token onda redirect na Dashboard
-  let authToken = false;
-  // *****************************************
+  const authToken = useSelector(selectAllVariables).authToken;
+  const url = urls.testing; //change to production when deploying
 
   // handles
   const handleRegisterClick = () => {
@@ -35,7 +34,9 @@ const Home = () => {
   }, [loading]);
 
   return loading ? (
-    <h1>loading...</h1>
+    <div className='loading-container center-flex'>
+      <h1>loading...</h1>
+    </div>
   ) : (
     <div id='home-page' className='height-100 center-flex'>
       <div className='logo-container center-flex'>

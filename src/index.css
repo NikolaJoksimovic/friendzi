@@ -31,6 +31,7 @@
 
   --margin-div: 1em 0 1em 0;
   --margin-input: 0.5em 0 0.5em 0;
+  --margin-input-side: 0 0.3em 0 0.3em;
 
   --transition02: all 0.2s linear;
   --transition01: all 0.1s linear;
@@ -229,5 +230,97 @@ input:-webkit-autofill:active {
   #register-form input {
     width: 350px;
   }
+}
+
+/* ONBOARDING PAGE */
+#onboarding-page {
+  flex-direction: column;
+  background-color: var(--clr-secondary);
+}
+#onboarding-form {
+  flex-direction: column;
+  max-width: 450px;
+}
+#onboarding-form input {
+  transition: var(--transition01);
+  outline: none;
+  border-radius: 1em;
+  width: 300px;
+  border: 0.15rem solid black;
+}
+#onboarding-form input:hover,
+#onboarding-form input:active,
+#onboarding-form input:focus {
+  border: 0.15rem solid var(--clr-primary);
+}
+#onboarding-form input {
+  font-size: 1.3em;
+  height: 3em;
+  padding: var(--padding-input);
+  margin: var(--margin-input);
+}
+#onboarding-form .dob-input {
+  width: 4em;
+  height: 3em;
+  margin: var(--margin-input-side);
+  text-align: center;
+}
+label {
+  font-size: 1.3em;
+  height: 3em;
+  padding: var(--padding-input);
+}
+.checkbox-container * {
+  flex-direction: column;
+}
+#onboarding-form input[type="checkbox"] {
+  accent-color: var(--clr-primary);
+  margin: var(--margin-input-side);
+  height: 2em;
+  width: 2em;
+}
+#onboarding-form input[type="checkbox"]:hover {
+  cursor: pointer;
+}
+#status-opt {
+  flex-direction: row;
+  margin: var(--margin-input);
+  padding: var(--padding-input);
+  font-size: 1.3em;
+  cursor: pointer;
+  border: 0.15rem solid black;
+}
+#status-opt:hover {
+  color: var(--clr-primary);
+}
+#status-opt:focus {
+  color: black;
+}
+.profile-img-container {
+  position: relative;
+  width: 125px;
+  height: 125px;
+  border: 0.15rem solid black;
+  border-radius: 100%;
+}
+.profile-img-container img {
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+  object-fit: cover;
+}
+.upload-img-btn {
+  position: absolute;
+  right: 2%;
+  bottom: 2%;
+  cursor: pointer;
+}
+.upload-img-btn svg {
+  border-radius: 100%;
+  border: 0.15rem solid var(--clr-accent);
+  font-size: 2rem;
+  padding: 0.1em;
+  background-color: var(--clr-accent);
+  color: var(--clr-font-secondary);
 }
 /* DASHBOARD PAGE */

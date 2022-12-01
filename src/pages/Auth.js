@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { selectAllVariables } from "../store/store";
+import urls from "../urls/urls.json";
+import axios from "axios";
 
 const Auth = () => {
   const navigate = useNavigate();
@@ -19,8 +21,16 @@ const Auth = () => {
     const value = e.target.value;
     setInput({ ...input, [name]: value });
   };
-  const handleSubmit = () => {
-    navigate("/dashboard");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const url = isSignIn ? `${urls.url}auth/register` : `${urls.url}auth/login`;
+    try {
+      const response = await axios.post(url, input);
+      isSignIn ? navigate("/onboarding") : navigate("/dashboard");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -67,7 +77,11 @@ const Auth = () => {
             </>
           )}
           <div className='btn-container'>
-            <button className='primary-btn' onClick={handleSubmit}>
+            <button
+              type='submit'
+              className='primary-btn'
+              onClick={handleSubmit}
+            >
               {isSignIn ? "sign in" : "log in"}
             </button>
           </div>
