@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { selectAllVariables } from "../store/store";
 import urls from "../urls/urls.json";
 import axios from "axios";
+import { useMyCookies } from "../hooks/useMyCookies";
 
 const Auth = () => {
   const navigate = useNavigate();
@@ -14,6 +15,7 @@ const Auth = () => {
     password: "",
     confirmPassword: "",
   });
+  const [cookies, setCookie, removeCookie] = useMyCookies("user-cookies");
 
   // handles
   const handleInputChange = (e) => {
@@ -21,12 +23,14 @@ const Auth = () => {
     const value = e.target.value;
     setInput({ ...input, [name]: value });
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const url = isSignIn ? `${urls.url}auth/register` : `${urls.url}auth/login`;
     try {
       const response = await axios.post(url, input);
+      console.log(response.data);
+      setCookie("token", response.data.user.token);
+      setCookie("userId", response.data.user.id);
       isSignIn ? navigate("/onboarding") : navigate("/dashboard");
     } catch (error) {
       console.log(error);

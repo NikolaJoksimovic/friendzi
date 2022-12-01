@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { AiOutlineUpload } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
+import { useMyCookies } from "../hooks/useMyCookies";
 import urls from "../urls/urls.json";
 
 const Onboarding = () => {
@@ -16,7 +17,8 @@ const Onboarding = () => {
     workingStatus: "",
   });
   const [checkBoxes, setCheckBoxes] = useState(null);
-
+  const [cookies, setCookie, removeCookie] = useMyCookies("user-cookies");
+  console.log(cookies);
   // handles
   const handleInputChange = (e) => {
     const name = e.target.name;
@@ -28,7 +30,10 @@ const Onboarding = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.patch("/onboarding", input);
+      const response = await axios.patch(`${url}onboarding/updateuser`, {
+        userId: cookies.userId,
+        ...input,
+      });
       if (response) navigate("/dashboard");
     } catch (error) {
       console.log(error);

@@ -1,17 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import logoImage from "../assets/images/friendzi_homepage_logo.png";
-import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import { invertIsSignIn, selectAllVariables } from "../store/store";
-import urls from "../urls/urls.json";
-import { useSelector } from "react-redux";
 
 const Home = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const authToken = useSelector(selectAllVariables).authToken;
-  const url = urls.testing; //change to production when deploying
 
   // handles
   const handleRegisterClick = () => {
