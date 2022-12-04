@@ -40,9 +40,7 @@ const Home = () => {
         <img src={logoImage} alt='logo.png' />
         <p id='friendzi-title'>FriendZi</p>
       </div>
-      <h1>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsa, nihil.
-      </h1>
+      <h1>The weekend is coming and you just wanna have fun!</h1>
       <div className='btn-container'>
         <button className='primary-btn' onClick={handleRegisterClick}>
           get started

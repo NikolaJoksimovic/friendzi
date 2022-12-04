@@ -168,7 +168,7 @@ const Onboarding = () => {
               className='center-flex'
               onClick={handleStatusChange}
             >
-              <option hidden disabled defaultValue=''>
+              <option hidden defaultValue=''>
                 working status
               </option>
               <option value='student'>student</option>
