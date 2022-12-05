@@ -1,5 +1,5 @@
 import { useCookies } from "react-cookie";
-export function useMyCookies(key) {
-  const [cookies, setCookie, removeCookie] = useCookies([key]);
+export function useMyCookies() {
+  const [cookies, setCookie, removeCookie] = useCookies("user-cookies");
   return [cookies, setCookie, removeCookie];
 }

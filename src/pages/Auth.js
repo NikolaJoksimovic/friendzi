@@ -5,6 +5,7 @@ import { selectAllVariables } from "../store/store";
 import urls from "../urls/urls.json";
 import axios from "axios";
 import { useMyCookies } from "../hooks/useMyCookies";
+import { formatErrorMessages } from "../functions/formatErrorMessage";
 
 const Auth = () => {
   const navigate = useNavigate();
@@ -15,7 +16,8 @@ const Auth = () => {
     password: "",
     confirmPassword: "",
   });
-  const [cookies, setCookie, removeCookie] = useMyCookies("user-cookies");
+  const [cookies, setCookie, removeCookie] = useMyCookies();
+  const [errMsg, setErrMsg] = useState("");
 
   // handles
   const handleInputChange = (e) => {
@@ -28,12 +30,11 @@ const Auth = () => {
     const url = isSignIn ? `${urls.url}auth/register` : `${urls.url}auth/login`;
     try {
       const response = await axios.post(url, input);
-      console.log(response.data);
       setCookie("token", response.data.user.token);
       setCookie("userId", response.data.user.id);
       isSignIn ? navigate("/onboarding") : navigate("/dashboard");
     } catch (error) {
-      console.log(error);
+      setErrMsg(error.response.data.msg);
     }
   };
 
@@ -80,6 +81,9 @@ const Auth = () => {
               </div>
             </>
           )}
+          <div className='err-msg-container'>
+            <p>{errMsg && formatErrorMessages(errMsg)}</p>
+          </div>
           <div className='btn-container'>
             <button
               type='submit'
@@ -90,6 +94,7 @@ const Auth = () => {
             </button>
           </div>
         </form>
+        <div></div>
       </div>
     </div>
   );

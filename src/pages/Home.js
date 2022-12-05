@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
 import logoImage from "../assets/images/friendzi_homepage_logo.png";
 import { useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { invertIsSignIn, selectAllVariables } from "../store/store";
+import { useDispatch } from "react-redux";
+import { invertIsSignIn, invertAuthToken } from "../store/store";
+import { useMyCookies } from "../hooks/useMyCookies";
 
 const Home = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
-  const authToken = useSelector(selectAllVariables).authToken;
+  const [cookies, setCookie, removeCookie] = useMyCookies();
 
   // handles
   const handleRegisterClick = () => {
@@ -21,7 +22,8 @@ const Home = () => {
   };
 
   useEffect(() => {
-    if (authToken) {
+    if (cookies.token) {
+      dispatch(invertAuthToken(true));
       navigate("/dashboard");
     }
     setLoading(true);

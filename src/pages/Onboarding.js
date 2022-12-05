@@ -4,29 +4,34 @@ import { AiOutlineUpload } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { useMyCookies } from "../hooks/useMyCookies";
 import urls from "../urls/urls.json";
+import { formatErrorMessages } from "../functions/formatErrorMessage";
+import PageNotAuthorized from "../components/PageNotAuthorized";
 
 const Onboarding = () => {
   const navigate = useNavigate();
   const [input, setInput] = useState({
     firstName: "",
     lastName: "",
-    dd: "",
-    mm: "",
-    yy: "",
+    dob: "",
     sex: "",
     workingStatus: "",
   });
   const [checkBoxes, setCheckBoxes] = useState(null);
   const [cookies, setCookie, removeCookie] = useMyCookies("user-cookies");
-  console.log(cookies);
+  const [errMsg, setErrMsg] = useState("");
+  const url = urls.url;
+
+  // useEffects
+  useEffect(() => {
+    setCheckBoxes(document.querySelectorAll(".checkbox-input"));
+  }, []);
+
   // handles
   const handleInputChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
     setInput({ ...input, [name]: value });
   };
-
-  const url = urls.url;
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -36,7 +41,7 @@ const Onboarding = () => {
       });
       if (response) navigate("/dashboard");
     } catch (error) {
-      console.log(error);
+      setErrMsg(error.response.data.msg);
     }
   };
   const removeChecks = function () {
@@ -53,12 +58,12 @@ const Onboarding = () => {
     setInput({ ...input, ["workingStatus"]: e.target.value });
   };
 
-  useEffect(() => {
-    setCheckBoxes(document.querySelectorAll(".checkbox-input"));
-  }, []);
-
-  // console.log(input);
-
+  if (!cookies.token)
+    return (
+      <div>
+        <PageNotAuthorized></PageNotAuthorized>
+      </div>
+    );
   return (
     <div id='onboarding-page' className='height-100 center-flex'>
       <h1>Profile Info</h1>
@@ -67,10 +72,10 @@ const Onboarding = () => {
           {/* name */}
           <div className='input-box'>
             <input
+              required={true}
               type='text'
               id='firstName'
               name='firstName'
-              required={true}
               autoComplete='false'
               onChange={handleInputChange}
               value={input.firstName}
@@ -79,10 +84,10 @@ const Onboarding = () => {
           </div>
           <div className='input-box'>
             <input
+              required={true}
               type='text'
               id='lastName'
               name='lastName'
-              required={true}
               autoComplete='false'
               onChange={handleInputChange}
               value={input.lastName}
@@ -95,31 +100,14 @@ const Onboarding = () => {
           </label>
           <div className='input-box center-flex'>
             <input
-              id='dd'
-              name='dd'
+              id='dob'
+              name='dob'
               className='dob-input'
-              type='number'
-              placeholder='DD'
+              type='date'
+              min='1900-01-01'
+              max='2020-01-01'
               onChange={handleInputChange}
-              value={input.dd}
-            />
-            <input
-              id='mm'
-              name='mm'
-              className='dob-input'
-              type='number'
-              placeholder='MM'
-              onChange={handleInputChange}
-              value={input.mm}
-            />
-            <input
-              id='yy'
-              name='yy'
-              className='dob-input center-flex'
-              type='number'
-              placeholder='YY'
-              onChange={handleInputChange}
-              value={input.yy}
+              value={input.dob}
             />
           </div>
           {/* sex */}
@@ -176,21 +164,28 @@ const Onboarding = () => {
               <option value='unemployed'>unemployed</option>
             </select>
           </div>
+          <div className='profile-img-container'>
+            <img
+              src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'
+              alt='default_profile_pic.png'
+            />
+            <div className='upload-img-btn'>
+              <AiOutlineUpload></AiOutlineUpload>
+            </div>
+          </div>
+          <div className='err-msg-container'>
+            <p>{errMsg && formatErrorMessages(errMsg)}</p>
+          </div>
+          <div className='btn-container'>
+            <button
+              type='submit'
+              className='primary-btn'
+              onClick={handleSubmit}
+            >
+              update profile
+            </button>
+          </div>
         </form>
-      </div>
-      <div className='profile-img-container'>
-        <img
-          src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'
-          alt='default_profile_pic.png'
-        />
-        <div className='upload-img-btn'>
-          <AiOutlineUpload></AiOutlineUpload>
-        </div>
-      </div>
-      <div className='btn-container'>
-        <button type='submit' className='primary-btn' onClick={handleSubmit}>
-          update profile
-        </button>
       </div>
     </div>
   );

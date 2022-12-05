@@ -4,11 +4,13 @@
   --font-primary: "Poppins", sans-serif;
 
   --clr-primary: rgb(248, 96, 26);
+  --clr-primary-light: rgb(248, 126, 70);
   --clr-secondary: white;
   --clr-accent: rgb(252, 69, 99);
   --clr-font-primary: rgb(248, 96, 26);
   --clr-font-secondary: white;
   --clr-shadow: black;
+  --clr-not-authorized: rgb(26, 26, 26);
 
   --overlay-black09: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9));
   --overlay-black08: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8));
@@ -73,6 +75,12 @@ body {
 }
 .height-80 {
   min-height: 80vh;
+}
+.height-70 {
+  min-height: 70vh;
+}
+.height-60 {
+  min-height: 60vh;
 }
 button {
   cursor: pointer;
@@ -196,6 +204,7 @@ input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
+  box-shadow: 0 0 0 3em white inset !important;
   -webkit-box-shadow: 0 0 0 3em white inset !important;
 }
 .input-span,
@@ -226,13 +235,18 @@ input:-webkit-autofill:active {
   transform: translate(1em, -50%);
 }
 
+.err-msg-container {
+  text-align: center;
+  width: 300px;
+}
+
 @media screen and (min-width: 768px) {
   #register-form input {
     width: 350px;
   }
 }
 
-/* ONBOARDING PAGE */
+/******************************* ONBOARDING PAGE *******************************/
 #onboarding-page {
   flex-direction: column;
   background-color: var(--clr-secondary);
@@ -260,7 +274,7 @@ input:-webkit-autofill:active {
   margin: var(--margin-input);
 }
 #onboarding-form .dob-input {
-  width: 4em;
+  width: 10em;
   height: 3em;
   margin: var(--margin-input-side);
   text-align: center;
@@ -323,4 +337,78 @@ label {
   background-color: var(--clr-accent);
   color: var(--clr-font-secondary);
 }
-/* DASHBOARD PAGE */
+
+/********************************** DASHBOARD PAGE **********************************/
+#dashboard-page {
+  background: var(--clr-secondary);
+}
+#dashboard-page header {
+  background-color: var(--clr-primary-light);
+}
+.dashboard-header-body {
+  width: 100%;
+  max-width: 1440px;
+  display: flex;
+  align-items: center;
+}
+.profile-img-container-dashboard {
+  padding: var(--padding-input);
+  width: 55px;
+  height: 55px;
+  border: none;
+}
+.user-name span {
+  font-size: 1em;
+  color: var(--clr-font-secondary);
+  padding: 0 0.5em 0 0.5em;
+}
+/* dasboard body */
+.dashboard-page-body {
+  width: 100%;
+  max-width: 1440px;
+  margin: auto;
+}
+.buttons-container {
+  padding: var(--padding-input);
+  justify-content: left;
+}
+.buttons-container button {
+  margin: 0.2em 0.5em 0 0;
+}
+.btn-container-secondary {
+  position: relative;
+  margin-bottom: 1.2em;
+  display: flex;
+}
+.secondary-btn {
+  border: 0.1rem solid var(--clr-accent);
+  background-color: var(--clr-accent);
+  color: var(--clr-font-secondary);
+  padding: 0.5em;
+  border-radius: 1em;
+  transition: var(--transition02);
+  width: 6em;
+
+  font-size: 1.5em;
+}
+.secondary-btn:hover {
+  transform: translate(0, -9px);
+  box-shadow: 0 9px 0rem 0rem var(--clr-shadow);
+  border: 0.1rem solid var(--clr-shadow);
+}
+#activities {
+  padding: var(--padding-page);
+  flex-direction: column;
+}
+@media screen and (min-width: 768px) {
+  .profile-img-container-dashboard {
+    width: 105px;
+    height: 105px;
+  }
+}
+
+/* NOT AUTHORIZED PAGE */
+#not-authorized-page {
+  padding: var(--padding-page);
+  background-color: var(--clr-not-authorized);
+}
