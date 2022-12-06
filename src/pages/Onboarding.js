@@ -21,9 +21,26 @@ const Onboarding = () => {
   const [errMsg, setErrMsg] = useState("");
   const url = urls.url;
 
+  const getUserInfo = async (url, userId) => {
+    try {
+      const userInfo = await axios.post(`${url}onboarding/getuserinfo`, {
+        userId,
+      });
+      console.log(userInfo.data);
+      setInput({
+        firstName: userInfo.data.firstName || "",
+        lastName: userInfo.data.lastName || "",
+        dob: userInfo.data.dob || "",
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   // useEffects
   useEffect(() => {
     setCheckBoxes(document.querySelectorAll(".checkbox-input"));
+    getUserInfo(url, cookies.userId);
   }, []);
 
   // handles
