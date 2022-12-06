@@ -138,11 +138,16 @@ h2 {
   max-width: 200px;
 }
 #friendzi-title {
+  cursor: pointer;
   position: relative;
   font-size: 2rem;
   font-weight: 700;
   color: var(--clr-accent);
   letter-spacing: 0.6rem;
+  transition: var(--transition01);
+}
+#friendzi-title:hover {
+  transform: scale(1.1);
 }
 #friendzi-title::after {
   content: "\00ae";
@@ -387,7 +392,7 @@ label {
   padding: 0.5em;
   border-radius: 1em;
   transition: var(--transition02);
-  width: 6em;
+  width: 7em;
 
   font-size: 1.5em;
 }

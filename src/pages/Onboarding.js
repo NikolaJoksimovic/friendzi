@@ -3,9 +3,9 @@ import React, { useEffect, useState } from "react";
 import { AiOutlineUpload } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { useMyCookies } from "../hooks/useMyCookies";
-import urls from "../urls/urls.json";
 import { formatErrorMessages } from "../functions/formatErrorMessage";
 import PageNotAuthorized from "../components/PageNotAuthorized";
+import urls from "../urls/urls.json";
 
 const Onboarding = () => {
   const navigate = useNavigate();
@@ -57,7 +57,11 @@ const Onboarding = () => {
   const handleStatusChange = (e) => {
     setInput({ ...input, ["workingStatus"]: e.target.value });
   };
+  const handleGoBackClick = () => {
+    navigate("/dashboard");
+  };
 
+  // return
   if (!cookies.token)
     return (
       <div>
@@ -183,6 +187,15 @@ const Onboarding = () => {
               onClick={handleSubmit}
             >
               update profile
+            </button>
+          </div>
+          <div className='btn-container-secondary'>
+            <button
+              type='submit'
+              className='secondary-btn'
+              onClick={handleGoBackClick}
+            >
+              go back
             </button>
           </div>
         </form>

@@ -37,10 +37,15 @@ const Auth = () => {
       setErrMsg(error.response.data.msg);
     }
   };
+  const handleHomePageClick = () => {
+    navigate("/");
+  };
 
   return (
     <div id='auth-page' className='height-100 center-flex'>
-      <p id='friendzi-title'>FriendZi</p>
+      <p id='friendzi-title' onClick={handleHomePageClick}>
+        FriendZi
+      </p>
       <div className='form-container'>
         <form id='register-form' className='center-flex'>
           <div className='input-box'>

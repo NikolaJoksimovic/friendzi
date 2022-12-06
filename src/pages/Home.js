@@ -20,7 +20,6 @@ const Home = () => {
     dispatch(invertIsSignIn(false));
     navigate("/auth");
   };
-
   useEffect(() => {
     if (cookies.token) {
       dispatch(invertAuthToken(true));

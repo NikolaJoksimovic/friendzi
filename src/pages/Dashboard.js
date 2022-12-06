@@ -16,9 +16,9 @@ const Dashboard = () => {
     const windowHeight = window.outerHeight;
     const btnsContainerEL = document.querySelector(".buttons-container");
     const activitiesEl = document.querySelector("#activities");
-    if (windowHeight > 450 && activitiesEl) {
+    if (windowHeight > 550 && activitiesEl) {
       document.getElementById("activities").style.height = `${
-        windowHeight - btnsContainerEL.offsetTop - 305
+        windowHeight - btnsContainerEL.offsetTop - 150
       }px`;
     }
   }, []); //initial height
@@ -27,9 +27,9 @@ const Dashboard = () => {
       const windowHeight = this.window.outerHeight;
       const btnsContainerEL = this.document.querySelector(".buttons-container");
       const activitiesEl = document.querySelector("#activities");
-      if (windowHeight > 450 && activitiesEl) {
+      if (windowHeight > 550 && activitiesEl) {
         document.getElementById("activities").style.height = `${
-          windowHeight - btnsContainerEL.offsetTop - 305
+          windowHeight - btnsContainerEL.offsetTop - 150
         }px`;
       }
     });
@@ -46,15 +46,21 @@ const Dashboard = () => {
     dispatch(invertAuthToken(false));
     navigate("/");
   };
+  const handleUserInfoClick = () => {
+    navigate("/onboarding");
+  };
+
   return !cookies.token ? (
     <PageNotAuthorized></PageNotAuthorized>
   ) : (
-    <div id='dashboard-page' className='height-100 '>
+    <div id='dashboard-page' className='height-90 '>
       <DashboardNav></DashboardNav>
       <div className='dashboard-page-body'>
         <div className='buttons-container center-flex'>
           <div className='btn-container-secondary'>
-            <button className='secondary-btn'>user info</button>
+            <button className='secondary-btn' onClick={handleUserInfoClick}>
+              profile info
+            </button>
           </div>
           <div className='btn-container-secondary'>
             <button className='secondary-btn' onClick={handleLogOutClick}>
