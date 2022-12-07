@@ -468,11 +468,11 @@ label {
 }
 .lastSlide {
   transform: translate(-140%, -50%);
-  opacity: 0.1;
+  opacity: 0;
 }
 .nextSlide {
   transform: translate(40%, -50%);
-  opacity: 0.1;
+  opacity: 0;
 }
 .slider-btns {
   justify-content: space-between;
@@ -498,6 +498,7 @@ label {
 }
 .reservation-display {
   flex-direction: column;
+  margin-bottom: 2em;
 }
 @media screen and (min-width: 768px) {
   #booking-page p {

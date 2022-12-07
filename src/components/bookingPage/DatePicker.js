@@ -160,6 +160,9 @@ const DatePicker = () => {
         <span style={{ fontWeight: "700" }}>book for: </span>
         {formatDateForDisplay(chosenDate, chosenTime)}
       </div>
+      <div className='btn-container-secondary'>
+        <button className='secondary-btn'>book it</button>
+      </div>
     </div>
   );
 };
