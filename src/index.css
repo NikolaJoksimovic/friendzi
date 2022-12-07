@@ -103,7 +103,7 @@ button {
   color: var(--clr-font-secondary);
   padding: 0.5em;
   border-radius: 1em;
-  transition: var(--transition02);
+  transition: var(--transition01);
 
   font-size: 2em;
 }
@@ -390,7 +390,7 @@ label {
   color: var(--clr-font-secondary);
   padding: 0.5em;
   border-radius: 1em;
-  transition: var(--transition02);
+  transition: var(--transition01);
   width: 7em;
 
   font-size: 1.5em;
@@ -446,17 +446,33 @@ label {
 
   transition: var(--transition02);
 }
+.times-display-container {
+  position: relative;
+  min-height: 2em;
+}
+.time-display {
+  width: 100px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  font-size: 1.3em;
+  text-align: center;
 
-.days-display-container .activeSlide {
+  transition: var(--transition02);
+}
+
+.activeSlide {
   opacity: 1;
 }
-.days-display-container .lastSlide {
+.lastSlide {
   transform: translate(-140%, -50%);
-  opacity: 0.2;
+  opacity: 0.1;
 }
-.days-display-container .nextSlide {
+.nextSlide {
   transform: translate(40%, -50%);
-  opacity: 0.2;
+  opacity: 0.1;
 }
 .slider-btns {
   justify-content: space-between;
@@ -474,6 +490,11 @@ label {
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: var(--transition01);
+}
+.slider-btns button:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px black;
 }
 .reservation-display {
   flex-direction: column;

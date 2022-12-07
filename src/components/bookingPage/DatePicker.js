@@ -1,11 +1,14 @@
-import { getAllByTestId, getElementError } from "@testing-library/react";
 import { React, useState, useEffect } from "react";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 const DatePicker = () => {
   const [date, setDate] = useState(new Date());
   const [week, setWeek] = useState([]);
   const [index, setIndex] = useState(0);
-  const [chosenDate, setChosenDate] = useState(0);
+  const [timeSpan, setTimeSpan] = useState([]);
+  const [timeIndex, setTimeIndex] = useState(0);
+  const [chosenDate, setChosenDate] = useState(new Date());
+  const [chosenTime, setChosenTime] = useState(0);
+  const [startingTime, setStartingTime] = useState(12);
   const weekday = [
     "Sunday",
     "Monday",
@@ -16,40 +19,56 @@ const DatePicker = () => {
     "Saturday",
   ];
 
+  // useEffects
   useEffect(() => {
     const array = [];
     for (let i = 0; i < 7; i++) {
-      if (i === 0) {
+      const day = (date.getDay() + i) % 7;
+      if (day === 0 || day === 6)
         array.push({
-          day: "Today",
-          dayOfMonth: date.getDate() + i,
-        });
-      } else if (i === 1) {
-        array.push({
-          day: "Tomorrow",
-          dayOfMonth: date.getDate() + i,
-        });
-      } else
-        array.push({
-          day: weekday[(i + date.getDay()) % 7],
+          day: weekday[day],
           dayOfMonth: date.getDate() + i,
         });
     }
     setWeek(array);
-    setChosenDate(date);
+    setChosenDate(date.setDate(array[0].dayOfMonth));
   }, [date]);
 
   useEffect(() => {
     setDate(new Date());
   }, []);
+
   useEffect(() => {
     setChosenDate(() => {
       return new Date(date.getTime() + index * 24 * 60 * 60 * 1000);
     });
   }, [index, date]);
 
+  useEffect(() => {
+    const currDate = new Date();
+    if (date && chosenDate) {
+      if (chosenDate.getDate() === currDate.getDate()) {
+        setStartingTime(chosenDate.getHours() + 1);
+      } else {
+        setStartingTime(12);
+      }
+    }
+  }, [chosenDate]);
+  useEffect(() => {
+    setChosenTime(startingTime);
+    const array = [];
+    for (let i = startingTime; i <= 22; i++) {
+      array.push(i);
+    }
+    setTimeSpan(array);
+  }, [startingTime]);
+  useEffect(() => {
+    setChosenTime(timeSpan[timeIndex]);
+  }, [timeIndex]);
+  // return
   return (
     <div id='date-picker' className='center-flex'>
+      {/********** DATE********* */}
       <div className='days-display-container center-flex'>
         {week.map((dayObj, dayObjIndex) => {
           let position;
@@ -85,42 +104,73 @@ const DatePicker = () => {
           className='slicer-btn slider-right'
           onClick={() => {
             setIndex((currIndex) => {
-              if (currIndex < 6) {
+              if (currIndex < 1) {
                 return currIndex + 1;
               }
-              return 6;
+              return 1;
             });
           }}
         >
           <AiOutlineRight></AiOutlineRight>
         </button>
       </div>
-
       {/********** TIME********* */}
-
+      <div className='times-display-container'>
+        {timeSpan.map((hour, hourIndex) => {
+          let position;
+          if (hourIndex === timeIndex) position = "activeSlide";
+          else if (hourIndex === timeIndex - 1) position = "lastSlide";
+          else if (hourIndex === timeIndex + 1) position = "nextSlide";
+          return (
+            <div key={hour} className={"time-display " + position}>
+              {hour}:00
+            </div>
+          );
+        })}
+      </div>
       <div className='slider-btns center-flex'>
-        <button className='slicer-btn slider-left'>
+        <button
+          className='slicer-btn slider-left'
+          onClick={() => {
+            setTimeIndex((currIndex) => {
+              if (currIndex > 0) {
+                return currIndex - 1;
+              }
+              return 0;
+            });
+          }}
+        >
           <AiOutlineLeft></AiOutlineLeft>
         </button>
-        <button className='slicer-btn slider-right'>
+        <button
+          className='slicer-btn slider-right'
+          onClick={() => {
+            setTimeIndex((currIndex) => {
+              if (currIndex < timeSpan.length - 1) {
+                return currIndex + 1;
+              }
+              return timeSpan.length - 1;
+            });
+          }}
+        >
           <AiOutlineRight></AiOutlineRight>
         </button>
       </div>
       <div className='reservation-display center-flex'>
         <span style={{ fontWeight: "700" }}>book for: </span>
-        {formatDateForDisplay(chosenDate)}
+        {formatDateForDisplay(chosenDate, chosenTime)}
       </div>
     </div>
   );
 };
 
-function formatDateForDisplay(date) {
+function formatDateForDisplay(date, time) {
   if (date) {
     const day = date.getDate();
     const month = date.getMonth();
     return `${day < 10 ? "0" + day : day}. ${
       month < 10 ? "0" + month : month
-    }. - 19:00h`;
+    }. - ${time}:00h`;
   }
   return;
 }
