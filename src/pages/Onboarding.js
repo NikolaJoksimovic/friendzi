@@ -26,7 +26,6 @@ const Onboarding = () => {
       const userInfo = await axios.post(`${url}onboarding/getuserinfo`, {
         userId,
       });
-      console.log(userInfo.data);
       setInput({
         firstName: userInfo.data.firstName || "",
         lastName: userInfo.data.lastName || "",

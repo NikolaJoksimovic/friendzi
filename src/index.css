@@ -46,7 +46,6 @@
 body {
   background: var(--overlay-white075),
     url("./assets/images/homepage_bg.jpg") center/cover no-repeat;
-  /* background-attachment: fixed; */
   font-family: var(--font-primary);
   color: var(--clr-font-primary);
   font-size: 0.7rem;
@@ -409,6 +408,93 @@ label {
   .profile-img-container-dashboard {
     width: 105px;
     height: 105px;
+  }
+}
+
+/* ************************** BOOKING PAGE *************************** */
+#booking-page {
+  padding: var(--padding-page);
+  background: var(--clr-secondary);
+  flex-direction: column;
+}
+#h1-activity {
+  padding: var(--padding-div);
+}
+#booking-page p {
+  font-size: 0.8em;
+  text-align: center;
+  max-width: 500px;
+  padding: 0.5em;
+  margin-bottom: 2em;
+}
+#date-picker {
+  flex-direction: column;
+}
+.days-display-container {
+  position: relative;
+  min-height: 2em;
+}
+.day-display {
+  width: 100px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  font-size: 1.3em;
+  text-align: center;
+
+  transition: var(--transition02);
+}
+
+.days-display-container .activeSlide {
+  opacity: 1;
+}
+.days-display-container .lastSlide {
+  transform: translate(-140%, -50%);
+  opacity: 0.2;
+}
+.days-display-container .nextSlide {
+  transform: translate(40%, -50%);
+  opacity: 0.2;
+}
+.slider-btns {
+  justify-content: space-between;
+  width: 100px;
+  padding: 0.5em;
+  margin-bottom: 2.5em;
+}
+.slider-btns button {
+  background-color: var(--clr-accent);
+  border: none;
+  color: var(--clr-font-secondary);
+  padding: 0.3em;
+  font-size: 1.3em;
+  border-radius: 0.6em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.reservation-display {
+  flex-direction: column;
+}
+@media screen and (min-width: 768px) {
+  #booking-page p {
+    padding: 1em;
+  }
+  .day-display {
+    width: 150px;
+  }
+  .slider-btns {
+    width: 130px;
+  }
+}
+@media screen and (min-width: 1080px) {
+  .day-display {
+    width: 250px;
+  }
+  .slider-btns {
+    width: 170px;
   }
 }
 

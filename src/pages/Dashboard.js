@@ -1,5 +1,4 @@
-import React from "react";
-import { useEffect } from "react";
+import { React, useEffect } from "react";
 import DashboardNav from "../components/DashboardNav";
 import { invertAuthToken } from "../store/store";
 import { useDispatch } from "react-redux";
@@ -49,7 +48,13 @@ const Dashboard = () => {
   const handleUserInfoClick = () => {
     navigate("/onboarding");
   };
-
+  const handleBookingClick = (activity) => {
+    navigate("/dashboard/booking", {
+      state: {
+        activity: activity,
+      },
+    });
+  };
   return !cookies.token ? (
     <PageNotAuthorized></PageNotAuthorized>
   ) : (
@@ -72,16 +77,36 @@ const Dashboard = () => {
           <h2>What are you up for?</h2>
           <div className='activities-opt'>
             <div className='btn-container-secondary'>
-              <button className='secondary-btn'>bowling</button>
+              <button
+                className='secondary-btn'
+                onClick={() => handleBookingClick("bowling")}
+              >
+                bowling
+              </button>
             </div>
             <div className='btn-container-secondary'>
-              <button className='secondary-btn'>cocktails</button>
+              <button
+                className='secondary-btn'
+                onClick={() => handleBookingClick("cocktails")}
+              >
+                cocktails
+              </button>
             </div>
             <div className='btn-container-secondary'>
-              <button className='secondary-btn'>carting</button>
+              <button
+                className='secondary-btn'
+                onClick={() => handleBookingClick("carting")}
+              >
+                carting
+              </button>
             </div>
             <div className='btn-container-secondary'>
-              <button className='secondary-btn'>cineplex</button>
+              <button
+                className='secondary-btn'
+                onClick={() => handleBookingClick("movies")}
+              >
+                movies
+              </button>
             </div>
           </div>
         </section>
