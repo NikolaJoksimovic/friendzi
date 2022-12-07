@@ -66,6 +66,7 @@ const DatePicker = () => {
     setChosenTime(timeSpan[timeIndex]);
   }, [timeIndex]);
   // return
+  console.log(date.getMonth());
   return (
     <div id='date-picker' className='center-flex'>
       {/********** DATE********* */}
@@ -172,7 +173,7 @@ function formatDateForDisplay(date, time) {
     const day = date.getDate();
     const month = date.getMonth();
     return `${day < 10 ? "0" + day : day}. ${
-      month < 10 ? "0" + month : month
+      month < 10 ? "0" + month + 1 : month + 1
     }. - ${time}:00h`;
   }
   return;
