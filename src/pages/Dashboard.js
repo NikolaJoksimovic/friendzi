@@ -1,10 +1,11 @@
 import { React, useEffect } from "react";
 import DashboardNav from "../components/DashboardNav";
+import PageNotAuthorized from "../components/PageNotAuthorized";
 import { invertAuthToken } from "../store/store";
 import { useDispatch } from "react-redux";
 import { useMyCookies } from "../hooks/useMyCookies";
 import { useNavigate } from "react-router-dom";
-import PageNotAuthorized from "../components/PageNotAuthorized";
+
 const Dashboard = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -55,6 +56,8 @@ const Dashboard = () => {
       },
     });
   };
+
+  // return
   return !cookies.token ? (
     <PageNotAuthorized></PageNotAuthorized>
   ) : (
@@ -62,15 +65,27 @@ const Dashboard = () => {
       <DashboardNav></DashboardNav>
       <div className='dashboard-page-body'>
         <div className='buttons-container center-flex'>
-          <div className='btn-container-secondary'>
-            <button className='secondary-btn' onClick={handleUserInfoClick}>
-              profile info
-            </button>
+          <div className='btns-left center-flex'>
+            <div className='btn-container-secondary'>
+              <button className='secondary-btn' onClick={handleUserInfoClick}>
+                profile info
+              </button>
+            </div>
+            <div className='btn-container-secondary'>
+              <button
+                className='secondary-btn'
+                onClick={() => navigate("/dashboard/myevents")}
+              >
+                my events
+              </button>
+            </div>
           </div>
-          <div className='btn-container-secondary'>
-            <button className='secondary-btn' onClick={handleLogOutClick}>
-              log out
-            </button>
+          <div className='btns-right'>
+            <div className='btn-container-secondary'>
+              <button className='secondary-btn' onClick={handleLogOutClick}>
+                log out
+              </button>
+            </div>
           </div>
         </div>
         <section id='activities' className='height-60 center-flex'>

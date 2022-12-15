@@ -3,8 +3,10 @@ import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 import { useMyCookies } from "../../hooks/useMyCookies";
 import axios from "axios";
 import urls from "../../urls/urls.json";
+import { useNavigate } from "react-router-dom";
 
 const DatePicker = ({ activity }) => {
+  const navigate = useNavigate();
   const [date, setDate] = useState(new Date());
   const [week, setWeek] = useState([]);
   const [index, setIndex] = useState(0);
@@ -24,6 +26,7 @@ const DatePicker = ({ activity }) => {
   ];
   const url = urls.url;
   const [cookies, setCookie, removeCookie] = useMyCookies();
+  const [errorMsg, setErrorMsg] = useState("");
 
   // useEffects
   useEffect(() => {
@@ -73,16 +76,20 @@ const DatePicker = ({ activity }) => {
   }, [timeIndex]);
 
   // handles
-  const handleBookingClick = () => {
+  const handleBookingClick = async () => {
     const eventId = `${chosenDate.getDate()}${
       chosenDate.getMonth() + 1
     }${chosenTime}00${activity}`;
     const userId = cookies.userId;
-    console.log(eventId, userId);
-    const response = axios.post(`${url}dashboard/bookevent`, {
-      user_id: userId,
-      event_id: eventId,
-    });
+    try {
+      const response = await axios.post(`${url}dashboard/bookevent`, {
+        user_id: userId,
+        event_id: eventId,
+      });
+      navigate("/dashboard");
+    } catch (error) {
+      setErrorMsg(error.response.data.msg);
+    }
   };
 
   // return
@@ -179,6 +186,9 @@ const DatePicker = ({ activity }) => {
       <div className='reservation-display center-flex'>
         <span style={{ fontWeight: "700" }}>book for: </span>
         {formatDateForDisplay(chosenDate, chosenTime)}
+      </div>
+      <div className='err-msg-container'>
+        <p>{errorMsg}</p>
       </div>
       <div className='btn-container-secondary'>
         <button className='secondary-btn' onClick={handleBookingClick}>

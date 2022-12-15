@@ -4,6 +4,7 @@ import Dashboard from "./pages/Dashboard";
 import Auth from "./pages/Auth";
 import Onboarding from "./pages/Onboarding";
 import Booking from "./pages/Booking";
+import MyEvents from "./pages/MyEvents";
 
 function App() {
   return (
@@ -17,6 +18,10 @@ function App() {
           <Route
             path='/dashboard/booking'
             element={<Booking></Booking>}
+          ></Route>
+          <Route
+            path='/dashboard/myevents'
+            element={<MyEvents></MyEvents>}
           ></Route>
         </Routes>
       </Router>
