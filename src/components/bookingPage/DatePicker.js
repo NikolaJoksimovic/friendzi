@@ -1,6 +1,10 @@
 import { React, useState, useEffect } from "react";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
-const DatePicker = () => {
+import { useMyCookies } from "../../hooks/useMyCookies";
+import axios from "axios";
+import urls from "../../urls/urls.json";
+
+const DatePicker = ({ activity }) => {
   const [date, setDate] = useState(new Date());
   const [week, setWeek] = useState([]);
   const [index, setIndex] = useState(0);
@@ -18,6 +22,8 @@ const DatePicker = () => {
     "Friday",
     "Saturday",
   ];
+  const url = urls.url;
+  const [cookies, setCookie, removeCookie] = useMyCookies();
 
   // useEffects
   useEffect(() => {
@@ -65,8 +71,21 @@ const DatePicker = () => {
   useEffect(() => {
     setChosenTime(timeSpan[timeIndex]);
   }, [timeIndex]);
+
+  // handles
+  const handleBookingClick = () => {
+    const eventId = `${chosenDate.getDate()}${
+      chosenDate.getMonth() + 1
+    }${chosenTime}00${activity}`;
+    const userId = cookies.userId;
+    console.log(eventId, userId);
+    const response = axios.post(`${url}dashboard/bookevent`, {
+      user_id: userId,
+      event_id: eventId,
+    });
+  };
+
   // return
-  console.log(date.getMonth());
   return (
     <div id='date-picker' className='center-flex'>
       {/********** DATE********* */}
@@ -162,7 +181,9 @@ const DatePicker = () => {
         {formatDateForDisplay(chosenDate, chosenTime)}
       </div>
       <div className='btn-container-secondary'>
-        <button className='secondary-btn'>book it</button>
+        <button className='secondary-btn' onClick={handleBookingClick}>
+          book it
+        </button>
       </div>
     </div>
   );

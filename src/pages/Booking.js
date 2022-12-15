@@ -20,7 +20,7 @@ const Booking = () => {
         This is so that the experience for other people is just as good as it is
         for you! Reservations are made maximum 7 days ahead.
       </p>
-      <DatePicker></DatePicker>
+      <DatePicker activity={activity}></DatePicker>
     </div>
   );
 };
