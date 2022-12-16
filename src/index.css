@@ -526,6 +526,19 @@ label {
   }
 }
 
+/******************************* MY EVETNS PAGE ********************************/
+#my-events-page {
+  background: var(--clr-secondary);
+  flex-direction: column;
+  padding: var(--padding-page);
+}
+#event-list-container {
+  padding: var(--padding-div);
+}
+#my-events-page h1 {
+  padding: 1em 0 1em 0;
+}
+
 /* NOT AUTHORIZED PAGE */
 #not-authorized-page {
   padding: var(--padding-page);
