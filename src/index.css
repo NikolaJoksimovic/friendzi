@@ -4,6 +4,7 @@
   --font-primary: "Poppins", sans-serif;
 
   --clr-primary: rgb(248, 96, 26);
+  --clr-primary05: rgba(248, 96, 26, 0.5);
   --clr-primary-light: rgb(248, 126, 70);
   --clr-secondary: white;
   --clr-accent: rgb(252, 69, 99);
@@ -536,9 +537,47 @@ label {
   padding: var(--padding-div);
 }
 #my-events-page h1 {
-  padding: 1em 0 1em 0;
+  margin: 1em 0 1em 0;
 }
-
+#my-events-page:last-of-type button {
+  margin: 1em 0 1em 0;
+}
+@keyframes pulsating-primary {
+  0% {
+    box-shadow: 0 0 1.5em 0.1em var(--clr-primary);
+  }
+  50% {
+    box-shadow: 0 0 3.5em 0.1em var(--clr-primary);
+  }
+  100% {
+    box-shadow: 0 0 1.5em 0.1em var(--clr-primary);
+  }
+}
+@keyframes pulsating-accent {
+  0% {
+    box-shadow: 0 0 1.5em 0.1em var(--clr-accent);
+  }
+  50% {
+    box-shadow: 0 0 3.5em 0.1em var(--clr-accent);
+  }
+  100% {
+    box-shadow: 0 0 1.5em 0.1em var(--clr-accent);
+  }
+}
+.event-card {
+  padding: 1em;
+  /* border-radius: 1em; */
+  animation: pulsating-primary 1s infinite;
+  outline: 0.15rem solid var(--clr-primary05);
+  transition: var(--transition01);
+}
+.event-card:hover {
+  cursor: pointer;
+  background-color: var(--clr-accent);
+  color: var(--clr-font-secondary);
+  outline: 0.15rem solid var(--clr-accent);
+  animation: none;
+}
 /* NOT AUTHORIZED PAGE */
 #not-authorized-page {
   padding: var(--padding-page);

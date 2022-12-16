@@ -40,7 +40,9 @@ const Dashboard = () => {
   // ***********************************************************************************
 
   // handles
-  const handleLogOutClick = () => {
+  const handleLogOutClick = (e) => {
+    e.preventDefault();
+    console.log("click");
     removeCookie("token");
     removeCookie("userId");
     dispatch(invertAuthToken(false));

@@ -77,9 +77,9 @@ const DatePicker = ({ activity }) => {
 
   // handles
   const handleBookingClick = async () => {
-    const eventId = `${chosenDate.getDate()}${
+    const eventId = `${formatTime(chosenDate.getDate())}${formatTime(
       chosenDate.getMonth() + 1
-    }${chosenTime}00${activity}`;
+    )}${chosenTime}00${activity}`;
     const userId = cookies.userId;
     try {
       const response = await axios.post(`${url}dashboard/bookevent`, {
@@ -198,6 +198,10 @@ const DatePicker = ({ activity }) => {
     </div>
   );
 };
+
+function formatTime(time) {
+  return `${time < 10 ? "0" + time : time}`;
+}
 
 function formatDateForDisplay(date, time) {
   if (date) {
