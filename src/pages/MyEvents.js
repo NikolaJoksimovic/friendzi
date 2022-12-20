@@ -14,9 +14,15 @@ const MyEvents = () => {
   const [backendData, setBackendData] = useState([]);
   const getEvents = async () => {
     try {
-      const response = await axios.post(`${url}dashboard/myevents`, {
-        user_id: cookies.userId,
-      });
+      const response = await axios.post(
+        `${url}dashboard/myevents`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${cookies.token}`,
+          },
+        }
+      );
       if (response) {
         setBackendData(response.data);
         setLoading(false);
@@ -38,16 +44,9 @@ const MyEvents = () => {
         <h1 style={{ textAlign: "center" }}>events</h1>
       </header>
       <div id='event-list-container'>
-        {Object.entries(backendData).map((entrie) => {
-          const eventId = entrie[1].event_id;
-          const users = entrie[1].users;
-          return (
-            <EventCard
-              key={eventId}
-              eventId={eventId}
-              users={users}
-            ></EventCard>
-          );
+        {backendData.map((entrie) => {
+          const eventId = entrie;
+          return <EventCard key={eventId} eventId={eventId}></EventCard>;
         })}
       </div>
       <div className='btn-container-secondary'>

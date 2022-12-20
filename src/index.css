@@ -542,32 +542,9 @@ label {
 #my-events-page:last-of-type button {
   margin: 1em 0 1em 0;
 }
-@keyframes pulsating-primary {
-  0% {
-    box-shadow: 0 0 1.5em 0.1em var(--clr-primary);
-  }
-  50% {
-    box-shadow: 0 0 3.5em 0.1em var(--clr-primary);
-  }
-  100% {
-    box-shadow: 0 0 1.5em 0.1em var(--clr-primary);
-  }
-}
-@keyframes pulsating-accent {
-  0% {
-    box-shadow: 0 0 1.5em 0.1em var(--clr-accent);
-  }
-  50% {
-    box-shadow: 0 0 3.5em 0.1em var(--clr-accent);
-  }
-  100% {
-    box-shadow: 0 0 1.5em 0.1em var(--clr-accent);
-  }
-}
 .event-card {
   padding: 1em;
-  /* border-radius: 1em; */
-  animation: pulsating-primary 1s infinite;
+  margin: 2em;
   outline: 0.15rem solid var(--clr-primary05);
   transition: var(--transition01);
 }

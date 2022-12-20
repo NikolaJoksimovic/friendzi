@@ -1,8 +1,14 @@
-const EventCard = ({ eventId, users }) => {
+// you get event id and array of user ids
+const EventCard = ({ eventId }) => {
   const formatedDate = getDateInfo(eventId);
 
   return (
-    <div className='event-card'>
+    <div
+      className='event-card'
+      onClick={() => {
+        console.log("click");
+      }}
+    >
       <header>
         <h3>{formatedDate}</h3>
       </header>

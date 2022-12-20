@@ -1,15 +1,20 @@
 import { React, useEffect } from "react";
 import DashboardNav from "../components/DashboardNav";
-import PageNotAuthorized from "../components/PageNotAuthorized";
 import { invertAuthToken } from "../store/store";
 import { useDispatch } from "react-redux";
 import { useMyCookies } from "../hooks/useMyCookies";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import LoadingPage from "../components/LoadingPage";
+import axios from "axios";
+import urls from "../urls/urls.json";
 
 const Dashboard = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [cookies, setCookie, removeCookie] = useMyCookies();
+  const [loading, setLoading] = useState(true);
+  const [userInfo, setUserInfo] = useState("");
 
   // Got to work on these more...It has to be a better way to code this section ****
   useEffect(() => {
@@ -39,6 +44,30 @@ const Dashboard = () => {
   }, []); //height on resize
   // ***********************************************************************************
 
+  const getData = async () => {
+    const url = urls.url;
+    try {
+      const response = await axios.post(
+        `${url}dashboard/finduser`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer: ${token}`,
+          },
+        }
+      );
+      setUserInfo({
+        firstName: response.data.firstName,
+        lastName: response.data.lastName,
+      });
+      setLoading(false);
+    } catch (error) {}
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
   // handles
   const handleLogOutClick = (e) => {
     e.preventDefault();
@@ -58,13 +87,13 @@ const Dashboard = () => {
       },
     });
   };
-
+  const token = cookies.token;
   // return
-  return !cookies.token ? (
-    <PageNotAuthorized></PageNotAuthorized>
+  return loading ? (
+    <LoadingPage></LoadingPage>
   ) : (
     <div id='dashboard-page' className='height-90 '>
-      <DashboardNav></DashboardNav>
+      <DashboardNav userInfo={userInfo}></DashboardNav>
       <div className='dashboard-page-body'>
         <div className='buttons-container center-flex'>
           <div className='btns-left center-flex'>

@@ -1,9 +1,9 @@
 import { React, useState, useEffect } from "react";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 import { useMyCookies } from "../../hooks/useMyCookies";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import urls from "../../urls/urls.json";
-import { useNavigate } from "react-router-dom";
 
 const DatePicker = ({ activity }) => {
   const navigate = useNavigate();
@@ -82,10 +82,17 @@ const DatePicker = ({ activity }) => {
     )}${chosenTime}00${activity}`;
     const userId = cookies.userId;
     try {
-      const response = await axios.post(`${url}dashboard/bookevent`, {
-        user_id: userId,
-        event_id: eventId,
-      });
+      const response = await axios.post(
+        `${url}dashboard/bookevent`,
+        {
+          event_id: eventId,
+        },
+        {
+          headers: {
+            Authorization: `Bearer: ${cookies.token}`,
+          },
+        }
+      );
       navigate("/dashboard");
     } catch (error) {
       setErrorMsg(error.response.data.msg);
