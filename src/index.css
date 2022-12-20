@@ -555,8 +555,33 @@ label {
   outline: 0.15rem solid var(--clr-accent);
   animation: none;
 }
-/* NOT AUTHORIZED PAGE */
+.event-modal {
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: var(--clr-secondary);
+  width: 100%;
+  transition: var(--transition02);
+}
+.user-list {
+  flex-direction: column;
+  margin-bottom: 2em;
+}
+.event-user {
+  padding: var(--padding-input);
+}
+/**************************** NOT AUTHORIZED PAGE *****************************/
 #not-authorized-page {
   padding: var(--padding-page);
   background-color: var(--clr-not-authorized);
+}
+
+/******************************* LOADING PAGE *****************************/
+#loading-page {
+  position: absolute;
+  z-index: 9999;
+  width: 100vw;
+  height: 100vh;
+  background: var(--clr-secondary);
 }

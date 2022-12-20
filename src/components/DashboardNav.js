@@ -1,5 +1,4 @@
-import { React, useState } from "react";
-import { useMyCookies } from "../hooks/useMyCookies";
+import { React } from "react";
 
 const DashboardNav = ({ userInfo }) => {
   return (
