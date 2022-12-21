@@ -92,7 +92,7 @@ const Dashboard = () => {
   return loading ? (
     <LoadingPage></LoadingPage>
   ) : (
-    <div id='dashboard-page' className='height-90 '>
+    <div id='dashboard-page' className='height-100 '>
       <DashboardNav userInfo={userInfo}></DashboardNav>
       <div className='dashboard-page-body'>
         <div className='buttons-container center-flex'>

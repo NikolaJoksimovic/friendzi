@@ -1,5 +1,5 @@
 {
-  "url": "https://friendzi-server.onrender.com/",
+  "url": "http://localhost:8000/",
   "testing": "http://localhost:8000/",
   "production": "https://friendzi-server.onrender.com/"
 }

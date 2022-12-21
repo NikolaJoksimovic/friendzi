@@ -64,7 +64,6 @@ const EventModal = ({ eventId, setEventModalId }) => {
       <div className='user-list center-flex'>
         {Object.entries(eventUsersInfo).map((entrie) => {
           const user = entrie[1];
-          console.log(user);
           const age =
             new Date(
               new Date().getTime() - new Date(user.dob).getTime()
