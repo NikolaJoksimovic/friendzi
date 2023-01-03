@@ -215,7 +215,7 @@ function formatDateForDisplay(date, time) {
     const day = date.getDate();
     const month = date.getMonth();
     return `${day < 10 ? "0" + day : day}. ${
-      month < 10 ? "0" + month + 1 : month + 1
+      month + 1 < 10 ? "0" + (month + 1) : month + 1
     }. - ${time}:00h`;
   }
   return;
