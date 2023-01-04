@@ -10,8 +10,9 @@
   --clr-accent: rgb(252, 69, 99);
   --clr-font-primary: rgb(248, 96, 26);
   --clr-font-secondary: white;
-  --clr-shadow: black;
   --clr-not-authorized: rgb(26, 26, 26);
+  --clr-shadow: black;
+  --clr-shadow-primary-light: rgba(248, 126, 70, 0.5);
 
   --overlay-black09: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9));
   --overlay-black08: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8));
@@ -38,6 +39,11 @@
 
   --transition02: all 0.2s linear;
   --transition01: all 0.1s linear;
+
+  --header-height: 55px;
+
+  --max-width: 1440px;
+  --max-width-sm: 768px;
 }
 * {
   box-sizing: border-box;
@@ -352,14 +358,14 @@ label {
 }
 .dashboard-header-body {
   width: 100%;
-  max-width: 1440px;
+  max-width: var(--max-width);
   display: flex;
   align-items: center;
 }
 .profile-img-container-dashboard {
   padding: var(--padding-input);
-  width: 55px;
-  height: 55px;
+  width: var(--header-height);
+  height: var(--header-height);
   border: none;
 }
 .user-name span {
@@ -370,7 +376,7 @@ label {
 /* dasboard body */
 .dashboard-page-body {
   width: 100%;
-  max-width: 1440px;
+  max-width: var(--max-width);
   margin: auto;
 }
 .buttons-container {
@@ -580,6 +586,40 @@ label {
   width: 100%;
   background: white;
 }
+.chat-header {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%);
+  height: var(--header-height);
+  width: 100%;
+  max-width: var(--max-width-sm);
+  margin: auto;
+
+  background-color: var(--clr-primary-light);
+}
+.chat-body {
+  position: absolute;
+  top: var(--header-height);
+  left: 50%;
+  transform: translate(-50%);
+  height: calc(100vh - var(--header-height) - var(--header-height));
+  width: 100%;
+  max-width: var(--max-width-sm);
+  margin: auto;
+}
+.chat-footer {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%);
+  height: var(--header-height);
+  width: 100%;
+  max-width: var(--max-width-sm);
+  margin: auto;
+  background-color: var(--clr-primary-light);
+}
+
 /**************************** NOT AUTHORIZED PAGE *****************************/
 #not-authorized-page {
   padding: var(--padding-page);

@@ -1,5 +1,5 @@
-import { useEffect, useState, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useMyCookies } from "../hooks/useMyCookies";
 import LoadingPage from "../components/LoadingPage";
 import EventCard from "../components/myEventsPage/EventCard";
@@ -9,11 +9,13 @@ import urls from "../urls/urls.json";
 
 const MyEvents = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const url = urls.url;
   const [loading, setLoading] = useState(true);
   const [cookies, setCookie, removeCookie] = useMyCookies();
   const [backendData, setBackendData] = useState([]);
   const [eventModalId, setEventModalId] = useState(null);
+  const [userInfo, setUserInfo] = useState(null);
   const getEvents = async () => {
     try {
       const response = await axios.post(
@@ -35,6 +37,8 @@ const MyEvents = () => {
   };
 
   useEffect(() => {
+    // we get user info from dashboared
+    setUserInfo(location.state.userInfo);
     getEvents();
   }, []);
 
@@ -72,6 +76,7 @@ const MyEvents = () => {
       </div>
       {eventModalId && (
         <EventModal
+          userInfo={userInfo}
           eventId={eventModalId}
           setEventModalId={setEventModalId}
         ></EventModal>

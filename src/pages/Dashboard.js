@@ -1,10 +1,10 @@
 import { React, useEffect } from "react";
-import DashboardNav from "../components/DashboardNav";
 import { invertAuthToken } from "../store/store";
 import { useDispatch } from "react-redux";
 import { useMyCookies } from "../hooks/useMyCookies";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import DashboardNav from "../components/DashboardNav";
 import LoadingPage from "../components/LoadingPage";
 import axios from "axios";
 import urls from "../urls/urls.json";
@@ -105,7 +105,11 @@ const Dashboard = () => {
             <div className='btn-container-secondary'>
               <button
                 className='secondary-btn'
-                onClick={() => navigate("/dashboard/myevents")}
+                onClick={() =>
+                  navigate("/dashboard/myevents", {
+                    state: { userInfo: userInfo },
+                  })
+                }
               >
                 my events
               </button>

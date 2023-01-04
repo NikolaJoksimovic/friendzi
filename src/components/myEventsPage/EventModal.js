@@ -5,7 +5,7 @@ import urls from "../../urls/urls.json";
 import LoadingPage from "../LoadingPage";
 import Chat from "./Chat";
 
-const EventModal = ({ eventId, setEventModalId }) => {
+const EventModal = ({ userInfo, eventId, setEventModalId }) => {
   const [loading, setLoading] = useState(true);
   const [eventUsers, setEventUsers] = useState("");
   const [cookies, setCookie, removeCookie] = useMyCookies();
@@ -59,13 +59,11 @@ const EventModal = ({ eventId, setEventModalId }) => {
     }
   }, [eventUsers]);
 
-  // console.log(eventUsersNumber);
-
   // return
   return loading ? (
     <LoadingPage></LoadingPage>
   ) : eventUsersNumber === 5 ? (
-    <Chat></Chat>
+    <Chat userInfo={userInfo} eventId={eventId}></Chat>
   ) : (
     <div className='event-modal height-100 center-flex'>
       <h2>{eventUsersInfo.length}/5 people</h2>
