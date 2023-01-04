@@ -571,6 +571,15 @@ label {
 .event-user {
   padding: var(--padding-input);
 }
+
+/************************ CHAT COMPONENT *************************/
+.chat-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: white;
+}
 /**************************** NOT AUTHORIZED PAGE *****************************/
 #not-authorized-page {
   padding: var(--padding-page);
