@@ -62,7 +62,7 @@ const EventModal = ({ userInfo, eventId, setEventModalId }) => {
   // return
   return loading ? (
     <LoadingPage></LoadingPage>
-  ) : eventUsersNumber === 5 ? (
+  ) : eventUsersNumber > 0 ? (
     <Chat userInfo={userInfo} eventId={eventId}></Chat>
   ) : (
     <div className='event-modal height-100 center-flex'>

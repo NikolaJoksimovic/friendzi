@@ -68,6 +68,7 @@ const MyEvents = () => {
       <div className='btn-container-secondary'>
         <button
           type='submit'
+          style={{ margin: "1em 0 1em 0" }}
           className='secondary-btn'
           onClick={() => navigate(-1)}
         >
