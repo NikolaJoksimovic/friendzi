@@ -16,6 +16,7 @@ const MyEvents = () => {
   const [backendData, setBackendData] = useState([]);
   const [eventModalId, setEventModalId] = useState(null);
   const [userInfo, setUserInfo] = useState(null);
+
   const getEvents = async () => {
     try {
       const response = await axios.post(
