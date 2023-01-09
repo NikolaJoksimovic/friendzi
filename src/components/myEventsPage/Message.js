@@ -6,7 +6,7 @@ const Message = ({ data }) => {
     <div
       className={
         data.user_id === cookies.userId
-          ? "chat-msg chat-msg-left"
+          ? "chat-msg chat-msg-right"
           : "chat-msg chat-msg-left"
       }
     >
