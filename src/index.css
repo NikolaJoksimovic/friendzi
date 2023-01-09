@@ -6,6 +6,7 @@
   --clr-primary: rgb(248, 96, 26);
   --clr-primary05: rgba(248, 96, 26, 0.5);
   --clr-primary-light: rgb(248, 126, 70);
+  --clr-primary-extra-light: rgb(255, 223, 205);
   --clr-secondary: white;
   --clr-accent: rgb(252, 69, 99);
   --clr-font-primary: rgb(248, 96, 26);
@@ -623,10 +624,60 @@ label {
   height: calc(100% - 2 * var(--header-height));
   width: 100%;
   max-width: var(--max-width-sm);
+  display: flex;
+  flex-direction: column;
+
   margin: auto;
+  padding: 0.6em 1em 0.6em 1em;
+  overflow-y: scroll;
 
   box-shadow: 0 0 0.5rem 0.1rem rgba(0, 0, 0, 0.39);
 }
+/* message styling START*/
+.chat-msg {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 0.2em 0 0.2em 0;
+}
+.chat-msg-left {
+  background-color: var(--clr-primary-extra-light);
+  align-items: flex-start;
+}
+.chat-msg-right {
+  align-items: flex-end;
+  text-align: right;
+}
+.chat-msg-right p {
+  background-color: var(--clr-primary-extra-light);
+}
+.chat-msg p {
+  position: relative;
+  width: fit-content;
+  max-width: 90%;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--clr-font-input);
+  padding: 0.2em 0.5em 0.2em 0.5em;
+  border-radius: 0.6em;
+}
+.chat-msg span:first-of-type {
+  display: inline-block;
+  position: absolute;
+  bottom: 0;
+  right: 0.9em;
+  color: rgb(165, 165, 165);
+  font-size: 0.7rem;
+  font-weight: 400;
+}
+#dummy-span {
+  display: block;
+  font-size: 0.7rem;
+  color: transparent;
+  padding: 0 0.2em 0 0.2em;
+}
+/* message styling END*/
+
 .chat-footer {
   z-index: 999;
   position: absolute;
