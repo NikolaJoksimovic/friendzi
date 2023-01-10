@@ -6,6 +6,7 @@ import { useMyCookies } from "../../hooks/useMyCookies";
 import { nanoid } from "@reduxjs/toolkit";
 import Message from "./Message";
 import urls from "../../urls/urls.json";
+import axios from "axios";
 
 const Chat = ({ userInfo, eventId }) => {
   const location = useNavigate();
@@ -13,6 +14,7 @@ const Chat = ({ userInfo, eventId }) => {
   const [cookies, addCookie, removeCookie] = useMyCookies();
   const [currentMessage, setCurrentMessage] = useState("");
   const [msgLog, setMsgLog] = useState([]);
+  const url = urls.url;
 
   const sendPackage = async (message) => {
     if (message !== "") {
@@ -28,6 +30,15 @@ const Chat = ({ userInfo, eventId }) => {
           new Date(Date.now()).getMinutes(),
       };
       await socket.emit("client_pkg", pkgData);
+      await axios.post(
+        `${url}dashboard/myevents/update_chat_log`,
+        { data: pkgData, event_id: eventId },
+        {
+          headers: {
+            Authorization: `Bearer ${cookies.token}`,
+          },
+        }
+      );
       setMsgLog((prevMsgLog) => [...prevMsgLog, pkgData]);
       // Every time you or anyone else sends a message, you should update the conversation in database for that event..
     }
@@ -47,15 +58,16 @@ const Chat = ({ userInfo, eventId }) => {
   };
   // useEffects
   useEffect(() => {
-    const url = urls.url;
     setSocket(io(`${url}`, {}));
   }, []);
 
   useEffect(() => {
-    socket?.emit("join_chat", { room_id: eventId });
-    socket?.on("server_pkg", (pkgData) => {
-      setMsgLog((prevMsgLog) => [...prevMsgLog, pkgData]);
-    });
+    if (socket) {
+      socket.emit("join_chat", { room_id: eventId });
+      socket.on("server_pkg", (pkgData) => {
+        setMsgLog((prevMsgLog) => [...prevMsgLog, pkgData]);
+      });
+    }
   }, [socket]);
 
   return (

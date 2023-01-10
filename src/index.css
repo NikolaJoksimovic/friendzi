@@ -647,7 +647,6 @@ label {
 }
 .chat-msg-right {
   align-items: flex-end;
-  text-align: right;
 }
 .chat-msg p {
   position: relative;
