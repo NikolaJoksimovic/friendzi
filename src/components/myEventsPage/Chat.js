@@ -30,6 +30,9 @@ const Chat = ({ userInfo, eventId }) => {
           new Date(Date.now()).getMinutes(),
       };
       await socket.emit("client_pkg", pkgData);
+      setMsgLog((prevMsgLog) => [...prevMsgLog, pkgData]);
+
+      // Every time you or anyone else sends a message, you should update the conversation in database for that event..
       await axios.post(
         `${url}dashboard/myevents/update_chat_log`,
         { data: pkgData, event_id: eventId },
@@ -39,8 +42,26 @@ const Chat = ({ userInfo, eventId }) => {
           },
         }
       );
-      setMsgLog((prevMsgLog) => [...prevMsgLog, pkgData]);
-      // Every time you or anyone else sends a message, you should update the conversation in database for that event..
+    }
+  };
+
+  const getChatHistory = async () => {
+    try {
+      const response = await axios.post(
+        `${url}dashboard/myevents/get_chat_history`,
+        { room_id: eventId },
+        {
+          headers: {
+            Authorization: `Bearer ${cookies.token}`,
+          },
+        }
+      );
+      if (response) {
+        const { data } = { ...response };
+        setMsgLog(data.data);
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -59,6 +80,10 @@ const Chat = ({ userInfo, eventId }) => {
   // useEffects
   useEffect(() => {
     setSocket(io(`${url}`, {}));
+  }, []);
+
+  useEffect(() => {
+    getChatHistory();
   }, []);
 
   useEffect(() => {
