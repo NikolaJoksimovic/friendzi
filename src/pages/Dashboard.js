@@ -15,6 +15,7 @@ const Dashboard = () => {
   const [cookies, setCookie, removeCookie] = useMyCookies();
   const [loading, setLoading] = useState(true);
   const [userInfo, setUserInfo] = useState("");
+  const token = cookies.token;
 
   // Got to work on these more...It has to be a better way to code this section ****
   useEffect(() => {
@@ -59,6 +60,7 @@ const Dashboard = () => {
       setUserInfo({
         firstName: response.data.firstName,
         lastName: response.data.lastName,
+        profileImg: response.data.profileImg,
       });
       setLoading(false);
     } catch (error) {}
@@ -87,7 +89,9 @@ const Dashboard = () => {
       },
     });
   };
-  const token = cookies.token;
+
+  // console.log(userInfo);
+
   // return
   return loading ? (
     <LoadingPage></LoadingPage>

@@ -62,8 +62,6 @@ const Onboarding = () => {
         userId: cookies.userId,
         ...input,
       });
-      removeCookie("profileImg");
-      setCookie("profileImg", profileImg);
       if (response) navigate("/dashboard");
     } catch (error) {
       setErrMsg(error.response.data.msg);
@@ -113,7 +111,7 @@ const Onboarding = () => {
     }
   };
 
-  console.log(input);
+  // console.log(input);
 
   // return
   if (!cookies.token)
