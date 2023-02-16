@@ -8,6 +8,7 @@ import PageNotAuthorized from "../components/PageNotAuthorized";
 import urls from "../urls/urls.json";
 
 const Onboarding = () => {
+  const url = urls.url;
   const navigate = useNavigate();
   const [input, setInput] = useState({
     firstName: "",
@@ -15,11 +16,12 @@ const Onboarding = () => {
     dob: "",
     sex: "",
     workingStatus: "",
+    img_url: "",
   });
   const [checkBoxes, setCheckBoxes] = useState(null);
   const [cookies, setCookie, removeCookie] = useMyCookies("user-cookies");
   const [errMsg, setErrMsg] = useState("");
-  const url = urls.url;
+  const [profileImg, setProfileImg] = useState("");
 
   const getUserInfo = async (url, userId) => {
     try {
@@ -31,6 +33,7 @@ const Onboarding = () => {
         lastName: userInfo.data.lastName || "",
         dob: userInfo.data.dob || "",
       });
+      userInfo.data.img_url && setProfileImg(userInfo.data.img_url);
     } catch (error) {
       console.log(error);
     }
@@ -41,6 +44,10 @@ const Onboarding = () => {
     setCheckBoxes(document.querySelectorAll(".checkbox-input"));
     getUserInfo(url, cookies.userId);
   }, []);
+
+  useEffect(() => {
+    setInput({ ...input, ["img_url"]: profileImg });
+  }, [profileImg]);
 
   // handles
   const handleInputChange = (e) => {
@@ -55,6 +62,8 @@ const Onboarding = () => {
         userId: cookies.userId,
         ...input,
       });
+      removeCookie("profileImg");
+      setCookie("profileImg", profileImg);
       if (response) navigate("/dashboard");
     } catch (error) {
       setErrMsg(error.response.data.msg);
@@ -76,6 +85,35 @@ const Onboarding = () => {
   const handleGoBackClick = () => {
     navigate("/dashboard");
   };
+  // img upload
+  const convertToBase64 = (file) => {
+    return new Promise((res, rej) => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+      fileReader.onload = () => {
+        res(fileReader.result);
+      };
+      fileReader.onerror = (error) => {
+        rej(error);
+      };
+    });
+  };
+  const handleImgUpload = async (e) => {
+    const file = e.target.files[0];
+    const base64File = await convertToBase64(file);
+    // setLoading(true)
+    try {
+      const response = await axios.post(`${url}onboarding/uploadimg`, {
+        user_id: cookies.userId,
+        image: base64File,
+      });
+      setProfileImg(response.data.img_url);
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
+
+  console.log(input);
 
   // return
   if (!cookies.token)
@@ -186,11 +224,25 @@ const Onboarding = () => {
           </div>
           <div className='profile-img-container'>
             <img
-              src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'
+              src={
+                profileImg
+                  ? profileImg
+                  : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+              }
               alt='default_profile_pic.png'
             />
             <div className='upload-img-btn'>
-              <AiOutlineUpload></AiOutlineUpload>
+              <label htmlFor='upload-img-input'>
+                <AiOutlineUpload></AiOutlineUpload>
+                <input
+                  type='file'
+                  name='upload-img-input'
+                  id='upload-img-input'
+                  onChange={(e) => {
+                    handleImgUpload(e);
+                  }}
+                />
+              </label>
             </div>
           </div>
           <div className='err-msg-container'>
