@@ -96,6 +96,14 @@ button {
   cursor: pointer;
   font-size: 1.4em;
 }
+.link {
+  text-decoration: none;
+}
+.link:active,
+.link:visited,
+.link:link {
+  color: inherit;
+}
 /* buttons */
 .btn-container {
   position: relative;
@@ -389,7 +397,7 @@ label {
   border: none;
 }
 .user-name span {
-  font-size: 1em;
+  font-size: 1.3em;
   color: var(--clr-font-secondary);
   padding: 0 0.5em 0 0.5em;
 }

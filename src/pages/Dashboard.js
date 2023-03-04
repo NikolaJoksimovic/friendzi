@@ -4,8 +4,8 @@ import { useDispatch } from "react-redux";
 import { useMyCookies } from "../hooks/useMyCookies";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import DashboardNav from "../components/DashboardNav";
-import LoadingPage from "../components/LoadingPage";
+import DashboardNav from "../components/dashboardPage/DashboardNav";
+import LoadingPage from "../components/commonPages/LoadingPage";
 import axios from "axios";
 import urls from "../urls/urls.json";
 
@@ -61,6 +61,7 @@ const Dashboard = () => {
         firstName: response.data.firstName,
         lastName: response.data.lastName,
         profileImg: response.data.profileImg,
+        ig_at: response.data.ig_at,
       });
       setLoading(false);
     } catch (error) {}
@@ -89,9 +90,6 @@ const Dashboard = () => {
       },
     });
   };
-
-  // console.log(userInfo);
-
   // return
   return loading ? (
     <LoadingPage></LoadingPage>

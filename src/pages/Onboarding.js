@@ -4,7 +4,7 @@ import { AiOutlineUpload } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { useMyCookies } from "../hooks/useMyCookies";
 import { formatErrorMessages } from "../functions/formatErrorMessage";
-import PageNotAuthorized from "../components/PageNotAuthorized";
+import PageNotAuthorized from "../components/commonPages/PageNotAuthorized";
 import urls from "../urls/urls.json";
 
 const Onboarding = () => {
@@ -15,8 +15,8 @@ const Onboarding = () => {
     lastName: "",
     dob: "",
     sex: "",
-    workingStatus: "",
     img_url: "",
+    ig_at: "",
   });
   const [checkBoxes, setCheckBoxes] = useState(null);
   const [cookies, setCookie, removeCookie] = useMyCookies("user-cookies");
@@ -28,10 +28,12 @@ const Onboarding = () => {
       const userInfo = await axios.post(`${url}onboarding/getuserinfo`, {
         userId,
       });
+
       setInput({
         firstName: userInfo.data.firstName || "",
         lastName: userInfo.data.lastName || "",
         dob: userInfo.data.dob || "",
+        ig_at: userInfo.data.ig_at || "",
       });
       userInfo.data.img_url && setProfileImg(userInfo.data.img_url);
     } catch (error) {
@@ -77,9 +79,6 @@ const Onboarding = () => {
     e.target.checked = true;
     setInput({ ...input, ["sex"]: e.target.value });
   };
-  const handleStatusChange = (e) => {
-    setInput({ ...input, ["workingStatus"]: e.target.value });
-  };
   const handleGoBackClick = () => {
     navigate("/dashboard");
   };
@@ -111,9 +110,7 @@ const Onboarding = () => {
     }
   };
 
-  // console.log(input);
-
-  // return
+  // RETURN
   if (!cookies.token)
     return (
       <div>
@@ -204,22 +201,7 @@ const Onboarding = () => {
               </div>
             </div>
           </div>
-          {/* status */}
-          <div className='input-box'>
-            <select
-              name='status-opt'
-              id='status-opt'
-              className='center-flex'
-              onClick={handleStatusChange}
-            >
-              <option hidden defaultValue=''>
-                working status
-              </option>
-              <option value='student'>student</option>
-              <option value='working'>working</option>
-              <option value='unemployed'>unemployed</option>
-            </select>
-          </div>
+          <div className='input-box'>{/* empty div, change later */}</div>
           <div className='profile-img-container'>
             <img
               src={
@@ -242,6 +224,21 @@ const Onboarding = () => {
                 />
               </label>
             </div>
+          </div>
+          <div className='input-box'>{/* empty div, change later */}</div>
+          {/* instagram profile */}
+          <div className='input-box'>
+            <input
+              type='text'
+              id='ig_at'
+              name='ig_at'
+              autoComplete='false'
+              onChange={handleInputChange}
+              value={input.ig_at}
+              style={{ width: "100%" }}
+              placeholder='@instagram'
+            />
+            <div className='input-span center-flex'>instagram profile</div>
           </div>
           <div className='err-msg-container'>
             <p>{errMsg && formatErrorMessages(errMsg)}</p>

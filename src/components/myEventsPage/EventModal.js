@@ -2,7 +2,7 @@ import { React, useEffect, useState } from "react";
 import { useMyCookies } from "../../hooks/useMyCookies";
 import axios from "axios";
 import urls from "../../urls/urls.json";
-import LoadingPage from "../LoadingPage";
+import LoadingPage from "../commonPages/LoadingPage";
 import Chat from "./Chat";
 
 const EventModal = ({ userInfo, eventId, setEventModalId }) => {

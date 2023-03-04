@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useMyCookies } from "../hooks/useMyCookies";
-import LoadingPage from "../components/LoadingPage";
+import LoadingPage from "../components/commonPages/LoadingPage";
 import EventCard from "../components/myEventsPage/EventCard";
 import EventModal from "../components/myEventsPage/EventModal";
 import axios from "axios";
