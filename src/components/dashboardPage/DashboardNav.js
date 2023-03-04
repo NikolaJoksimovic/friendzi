@@ -3,7 +3,7 @@ import { React } from "react";
 const DashboardNav = ({ userInfo }) => {
   console.log(userInfo);
   const instagramLink =
-    "https://www.instagram.com/" + userInfo.ig_at.substring(1);
+    "https://www.instagram.com/" + userInfo.ig_at?.substring(1);
 
   console.log(instagramLink);
   return (
@@ -34,7 +34,12 @@ const DashboardNav = ({ userInfo }) => {
               color: "var(--clr-secondary)",
             }}
           >
-            <a className='link' href={instagramLink} target='_blank'>
+            <a
+              className='link'
+              href={instagramLink}
+              target='_blank'
+              style={{ pointerEvents: userInfo.ig_at ? "default" : "none" }}
+            >
               {userInfo.ig_at}
             </a>
           </span>
